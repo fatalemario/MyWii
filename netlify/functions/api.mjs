@@ -43,15 +43,16 @@ async function body(event) {
   try { return JSON.parse(event.body || '{}'); } catch { throw Object.assign(new Error('JSON invalide.'), { status: 400 }); }
 }
 async function run(event) {
-  const s = client();
   const url = new URL(event.rawUrl || `https://mywii.invalid${event.path || '/'}`);
   const path = url.pathname.replace(/^.*?\/api\/?/, '').replace(/\/$/, '');
   const method = event.httpMethod;
   if (method === 'OPTIONS') return { statusCode: 204, headers: cors, body: '' };
+  // Public browser configuration must not require the private service-role key.
   if (path === 'config' && method === 'GET') return json(200, {
     supabaseUrl: process.env.SUPABASE_URL || '',
     supabaseAnonKey: process.env.SUPABASE_ANON_KEY || ''
   });
+  const s = client();
 
   // Public catalogue and approved downloads
   if (path === 'games' && method === 'GET') {
@@ -231,7 +232,27 @@ async function run(event) {
 }
 async function areFriends(s,a,b){const {data}=await s.from('friendships').select('id').eq('status','accepted').or(`and(user_id.eq.${a},friend_id.eq.${b}),and(user_id.eq.${b},friend_id.eq.${a})`).maybeSingle();return !!data;}
 async function sha256(value){const bytes=new TextEncoder().encode(value);const hash=await crypto.subtle.digest('SHA-256',bytes);return [...new Uint8Array(hash)].map(b=>b.toString(16).padStart(2,'0')).join('');}
-export default async (event) => {
-  try { return await run(event); }
-  catch (e) { console.error('MyWii API:',e); return fail(e.status||500,e.status?e.message:'Erreur serveur. Vérifie la configuration Supabase et les tables SQL.'); }
+// Netlify Functions v2 uses the standard Fetch API: Request in, Response out.
+export default async (request) => {
+  try {
+    const headers = Object.fromEntries(request.headers.entries());
+    const event = {
+      rawUrl: request.url,
+      path: new URL(request.url).pathname,
+      httpMethod: request.method,
+      headers,
+      body: ['GET', 'HEAD'].includes(request.method) ? null : await request.text()
+    };
+    const result = await run(event);
+    if (result instanceof Response) return result;
+    const responseHeaders = new Headers(result.headers || {});
+    return new Response(result.body ?? '', {
+      status: result.statusCode || 200,
+      headers: responseHeaders
+    });
+  } catch (e) {
+    console.error('MyWii API:', e);
+    const result = fail(e.status || 500, e.status ? e.message : 'Erreur serveur. Vérifie la configuration Supabase et les tables SQL.');
+    return new Response(result.body, { status: result.statusCode, headers: result.headers });
+  }
 };
