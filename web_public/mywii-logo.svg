@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" role="img" aria-label="MyWii">
+  <defs>
+    <linearGradient id="g" x1="12" y1="8" x2="112" y2="120" gradientUnits="userSpaceOnUse"><stop stop-color="#55d7f4"/><stop offset="1" stop-color="#087eaf"/></linearGradient>
+    <linearGradient id="shine" x1="32" y1="16" x2="86" y2="100" gradientUnits="userSpaceOnUse"><stop stop-color="#fff" stop-opacity=".8"/><stop offset="1" stop-color="#fff" stop-opacity="0"/></linearGradient>
+    <filter id="s" x="-20%" y="-20%" width="140%" height="150%"><feDropShadow dx="0" dy="5" stdDeviation="5" flood-color="#126c8c" flood-opacity=".22"/></filter>
+  </defs>
+  <circle cx="64" cy="61" r="55" fill="#fff" filter="url(#s)"/>
+  <circle cx="64" cy="61" r="48" fill="url(#g)"/>
+  <path d="M20 50C27 24 48 13 69 13c17 0 31 8 40 22-18-10-46-10-68 2-8 4-15 9-21 16Z" fill="url(#shine)"/>
+  <path d="M30 43h10l12 22 12-22h10v39H64V61L53 80 42 61v21H30V43Zm52 0h12l-8 39H74l8-39Zm20 0h12l-8 39H94l8-39Z" fill="#fff" opacity=".98"/>
+  <circle cx="99" cy="29" r="4" fill="#fff" opacity=".9"/>
+</svg>

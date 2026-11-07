@@ -3,15 +3,54 @@
 <head>
   <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
   <meta name="theme-color" content="#eaf8ff"><meta name="description" content="MyWii — découvre des jeux PC indépendants, retrouve tes amis et grimpe dans les classements.">
-  <title>MyWii — Le monde des jeux</title><link rel="stylesheet" href="/style.css">
+  <title>MyWii — Le monde des jeux</title><link rel="icon" type="image/svg+xml" href="/mywii-logo.svg"><link rel="stylesheet" href="/style.css">
   <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
 </head>
 <body>
-  <div class="boot" id="boot"><div class="boot-logo">MY<span>WII</span></div><p>Le monde des jeux</p><button class="btn primary" id="enterBtn">Entrer dans MyWii <span>▶</span></button><small>La musique du menu démarre à ton entrée</small></div>
+  <div class="boot" id="boot"><img class="boot-logo-image" src="/mywii-logo.svg" alt="Logo MyWii"><h1 class="boot-title">MyWii</h1><p>LE MONDE DES JEUX</p><button class="btn primary" id="enterBtn">Démarrer <span>▶</span></button><small>La musique du menu démarre à ton entrée</small></div>
   <audio id="menuMusic" src="/wii-menu.mp3" loop preload="auto"></audio>
+  <section id="authGate" class="auth-gate" hidden>
+    <div class="auth-shell">
+      <div class="auth-brand"><img src="/mywii-logo.svg" alt="MyWii"><div><b>MyWii</b><small>LE MONDE DES JEUX</small></div></div>
+      <div class="auth-layout">
+        <div class="auth-promo">
+          <span class="eyebrow">TA COMMUNAUTÉ DE JOUEURS</span>
+          <h1>Le jeu est meilleur <em>ensemble.</em></h1>
+          <p>Retrouve tes amis, découvre des jeux PC indépendants et bats des records dans les classements MyWii.</p>
+          <div class="auth-perks"><span>🎮 Jeux PC communautaires</span><span>💬 Salons et messages entre amis</span><span>🏆 Classements et trophées</span></div>
+          <div class="launcher-card"><div class="launcher-icon">W</div><div class="launcher-copy"><b>MyWii sur ton PC</b><small>Une fenêtre dédiée façon chaîne Wii. Le pack crée le fichier EXE sur ton PC.</small><a href="/downloads/MyWiiLauncher_Windows.zip" class="launcher-download" download>Télécharger le pack du launcher Windows <span>↓</span></a></div></div>
+        </div>
+        <div class="auth-card">
+          <div id="authFormPanel">
+            <span class="eyebrow" id="authEyebrow">HEUREUX DE TE REVOIR</span>
+            <h2 id="authTitle">Connexion</h2>
+            <p class="auth-subtitle" id="authSubtitle">Connecte-toi pour entrer dans l'univers MyWii.</p>
+            <form id="authForm" class="auth-form">
+              <label id="usernameField" hidden>Pseudo MyWii<input id="authUsername" placeholder="Ex. fatalemario" maxlength="20" autocomplete="nickname"></label>
+              <label>Adresse e-mail<input id="authEmail" type="email" placeholder="toi@exemple.com" autocomplete="email" required></label>
+              <label>Mot de passe<input id="authPassword" type="password" placeholder="8 caractères minimum" minlength="8" autocomplete="current-password" required></label>
+              <button class="btn primary auth-submit" id="authSubmit" type="submit">Se connecter <span>→</span></button>
+              <p id="authError" class="error auth-error" role="alert"></p>
+            </form>
+            <p class="auth-switch" id="authSwitch">Nouveau sur MyWii ? <a href="#" id="authSwitchLink">Créer un compte</a></p>
+            <p class="auth-legal">En continuant, tu acceptes de respecter les règles de la communauté MyWii.</p>
+          </div>
+          <div id="confirmPanel" class="confirm-panel" hidden>
+            <div class="confirm-icon">✉</div><span class="eyebrow">PLUS QU'UNE ÉTAPE</span><h2>Vérifie tes e-mails</h2>
+            <p>Nous avons envoyé un lien de confirmation à <b id="confirmEmail"></b>. Clique dessus pour activer ton compte et revenir automatiquement sur MyWii.</p>
+            <button class="btn primary" id="resendConfirm" type="button">Renvoyer l'e-mail</button>
+            <button class="text-btn" id="backToLogin" type="button">Retour à la connexion</button>
+            <p id="confirmMessage" class="auth-feedback" role="status"></p>
+          </div>
+        </div>
+      </div>
+      <div class="auth-footer"><span>© MyWii Community</span><span>Une plateforme créée pour jouer ensemble.</span></div>
+    </div>
+  </section>
+  <div id="appShell" hidden>
   <header class="topbar">
-    <button class="brand" data-page="home" aria-label="Accueil MyWii"><span class="brand-disc">◉</span><span><b>MyWii</b><small>LE MONDE DES JEUX</small></span></button>
+    <button class="brand" data-page="home" aria-label="Accueil MyWii"><img class="brand-logo" src="/mywii-logo.svg" alt=""><span><b>MyWii</b><small>LE MONDE DES JEUX</small></span></button>
     <nav id="mainNav">
       <button class="nav-link active" data-page="home">Accueil</button><button class="nav-link" data-page="games">Jeux</button><button class="nav-link" data-page="friends">Amis</button><button class="nav-link" data-page="rooms">Salons</button><button class="nav-link" data-page="ranking">Classements</button><button class="nav-link" data-page="profile">Profil</button><button class="nav-link" data-page="dev">Créateurs</button>
     </nav>
@@ -36,9 +75,9 @@ Content-Type: application/json
 
 {"game_id":"ID_DU_JEU","score":1200}</pre><p class="muted">Pour un anti-triche fort, le jeu doit faire vérifier ses résultats par une logique serveur propre à ses règles.</p></div></section>
   </main>
-  <footer><div class="brand footer-brand"><span class="brand-disc">◉</span><span><b>MyWii</b><small>LE MONDE DES JEUX</small></span></div><p>Une plateforme communautaire de jeux PC indépendants.</p><span>© MyWii Community</span></footer>
+  <footer><div class="brand footer-brand"><img class="brand-logo" src="/mywii-logo.svg" alt=""><span><b>MyWii</b><small>LE MONDE DES JEUX</small></span></div><p>Une plateforme communautaire de jeux PC indépendants.</p><span>© MyWii Community</span></footer>
+  </div><!-- /appShell : visible uniquement après connexion -->
 
-  <div class="modal" id="authModal"><form class="dialog" id="authForm"><button type="button" class="close" data-close>×</button><span class="eyebrow">TON COMPTE MYWII</span><h2 id="authTitle">Connexion</h2><input id="authUsername" placeholder="Pseudo (pour l'inscription)" maxlength="20" hidden><input id="authEmail" type="email" placeholder="Adresse e-mail" required><input id="authPassword" type="password" placeholder="Mot de passe (8 caractères min.)" minlength="8" required><button class="btn primary">Continuer</button><p id="authSwitch">Pas encore de compte ? <a href="#">Créer un compte</a></p><p id="authError" class="error"></p></form></div>
   <div class="modal" id="publishModal"><form class="dialog wide" id="publishForm"><button type="button" class="close" data-close>×</button><span class="eyebrow">PARTAGE TA CRÉATION</span><h2>Publier un jeu PC</h2><input name="title" placeholder="Nom du jeu" maxlength="60" required><textarea name="description" placeholder="Description du jeu" maxlength="3000"></textarea><div class="form-row"><input name="genre" placeholder="Genre" value="Autre" maxlength="40"><input name="version" placeholder="Version" value="1.0" maxlength="20"></div><label class="check"><input type="checkbox" name="is_multiplayer" checked> Jeu multijoueur avec classement MyWii</label><label class="field-label">Score maximum accepté<input name="score_limit" type="number" min="1" step="1" value="1000000000" required></label><label class="file-drop">📦 Choisir le fichier Windows .exe<input type="file" name="game" accept=".exe,application/vnd.microsoft.portable-executable" required><small>Le fichier est envoyé dans le stockage privé MyWii. Taille maximale configurée : 500 Mo.</small></label><p class="warning">Les publications attendent une validation. N'envoie que des jeux dont tu possèdes les droits.</p><button type="submit" class="btn primary">Envoyer pour validation</button><p id="publishError" class="error"></p></form></div>
   <div class="modal" id="roomModal"><form class="dialog" id="roomForm"><button type="button" class="close" data-close>×</button><h2>Créer une session</h2><input name="name" placeholder="Nom du salon" maxlength="40" required><label class="check"><input type="checkbox" name="private" checked> Salon privé (sur invitation)</label><button class="btn primary">Créer le salon</button><p id="roomError" class="error"></p></form></div>
   <div class="modal" id="keyModal"><div class="dialog"><button type="button" class="close" data-close>×</button><span class="eyebrow">CLÉ D'INTÉGRATION</span><h2>Copie ta clé maintenant</h2><p>Cette clé ne sera plus affichée. Ne la partage pas publiquement.</p><p class="muted">ID du jeu</p><code id="newGameId" class="key-box"></code><p class="muted">Clé secrète d’intégration</p><code id="newGameKey" class="key-box"></code><button class="btn primary" id="copyKey">Copier la clé</button></div></div>
