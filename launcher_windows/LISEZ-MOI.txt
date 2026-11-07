@@ -1,0 +1,5 @@
+MYWII LAUNCHER WINDOWS
+
+Lancez build_launcher.bat pour fabriquer MyWiiLauncher.exe dans le dossier dist.
+Le programme ouvre le menu Wii hébergé sur https://mywii.netlify.app/launcher.html.
+Les chaînes Amis et Salons demandent une connexion dans le launcher (même compte que le site).

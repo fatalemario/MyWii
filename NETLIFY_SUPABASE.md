@@ -95,3 +95,10 @@ Le fichier `web_public/wii-menu.mp3` est la musique de menu fournie avec le ZIP.
 - Crée un salon et rejoins-le avec son code depuis le deuxième compte.
 - Publie un petit EXE de test, approuve-le avec le compte admin, puis teste le téléchargement.
 - Intègre un jeu de test et vérifie qu'un score trop élevé ou envoyé trop vite est refusé.
+
+
+## Authentification et confirmation e-mail (mise à jour MyWii)
+
+Consulte `SUPABASE_AUTH_SETUP.md` pour configurer les URL de retour de confirmation. Le site affiche désormais uniquement l’écran de connexion tant qu’aucune session Supabase n’est active. Le lien de confirmation renvoie vers `https://mywii.netlify.app/`. Le modèle d’e-mail HTML est fourni dans `supabase_confirm_email.html`.
+
+Le paquet du launcher Windows est dans `web_public/downloads/MyWiiLauncher_Windows.zip`. Il contient le wrapper PyWebView et `build_launcher.bat` pour construire le fichier EXE sur Windows.

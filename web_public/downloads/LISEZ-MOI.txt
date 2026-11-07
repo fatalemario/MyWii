@@ -1,0 +1,13 @@
+MYWII LAUNCHER POUR WINDOWS
+
+Ce launcher ouvre https://mywii.netlify.app dans une fenetre de bureau dediee.
+Il ne contient pas les jeux : les jeux restent telecharges depuis MyWii.
+
+CONSTRUCTION :
+1. Installe Python 3.11 ou 3.12 sur Windows.
+2. Double-clique sur build_launcher.bat.
+3. Attends la fin de l'installation et de la compilation.
+4. Lance dist\MyWiiLauncher.exe.
+
+Le premier lancement peut demander l'installation du runtime Microsoft Edge WebView2.
+Utilise uniquement le site officiel MyWii : https://mywii.netlify.app
