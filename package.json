@@ -1,0 +1,8 @@
+{
+  "name": "mywii-community",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {"check": "node --check netlify/functions/api.mjs"},
+  "dependencies": {"@supabase/supabase-js": "^2.57.0"}
+}
